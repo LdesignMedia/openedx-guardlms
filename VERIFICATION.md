@@ -93,7 +93,8 @@ CPU architectures require their own compatibility verification.
 | Connector `pytest -q` in host tools environment (Python 3.15 / Django 5.2.19) | 31 passed |
 | `DJANGO_SETTINGS_MODULE=tests.settings python -m django makemigrations --check --dry-run` | No changes detected |
 | `python -m build --wheel` | Built successfully; compiled Dutch translations included |
-| `test.sh backend-tests` | 940 tests, 3,677 assertions passed; 78 existing PHPUnit deprecation notices |
+| `test.sh backend-tests` | 943 tests, 3,686 assertions passed; 78 existing PHPUnit deprecation notices |
+| Main-branch Moodle dependency risk regressions | 28 tests, 96 assertions passed |
 | Frontend Vitest: connect callback, consent page, connector catalog, error card | 51 passed |
 | Frontend `npm run typecheck` and ESLint on changed TS/TSX | Passed |
 | SDK `npm test -- --runInBand` | 326 passed across 8 suites |
@@ -103,7 +104,7 @@ CPU architectures require their own compatibility verification.
 The backend filter includes all existing external-push/connect suites, SDK key
 and origin validation, lockfile/OSV matching, error processing and platform detail
 regressions. Deterministic OSV fixtures cover both npm and PyPI advisories, PyPI
-normalization, advisory hydration and outage/incomplete-result preservation.
+normalization, advisory hydration, successful later-page matching and outage/incomplete-result preservation.
 Connector tests additionally cover expired/session-bound callback state, wrong
 callback host, generation races, retry/backoff, telemetry recursion suppression,
 redaction, corrupt credentials, disabled options and Dutch monitoring controls.
@@ -132,8 +133,9 @@ SDK defaults. Controlled exception endpoints and Celery task live only in this
 harness and are absent from the connector wheel.
 
 Live external advisory services are disabled in the disposable receiver. Matching
-uses deterministic fixtures in the backend tests. OSV failures or paginated partial
-results preserve existing alerts and cannot establish a clean result. Update and
+uses deterministic fixtures in the backend tests. OSV follows bounded pagination;
+failures, malformed data or incomplete pagination preserve existing alerts and
+cannot establish a clean result. Update and
 advisory coverage for unmapped plugin identities remains unknown; no latest-version
 catalog is invented for Open edX plugins.
 
@@ -142,3 +144,14 @@ Raw logs, screenshots and disposable configuration remain under
 and initialization logs can contain disposable deployment secrets and are not
 committed. The reviewed source, commands, exact artifact identities and results
 above are the portable verification record.
+
+## Current-main integration
+
+The review branch integrates upstream `146f6839897df06416f85c5f97d83cd26e3191f5`.
+The OSV resolution retains upstream's full advisory hydration and bounded pagination,
+adding canonical PyPI comparison in both package verification and range extraction.
+The post-merge backend (943 tests), additional Moodle dependency regressions
+(28 tests), frontend tests/typecheck and marketing checks pass. The isolated
+receiver's new upstream migration was applied before repeating real receiver
+lifecycle checks and dashboard rendering. The connector package code and image
+identities above are unchanged. Its hosted CI also passed on Python 3.12 and 3.13.
