@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openedx-guardlms"
+version = "0.1.0"
+description = "GuardLMS inventory, security checks and optional monitoring for Open edX"
+requires-python = ">=3.11"
+dependencies = ["Django>=4.2,<6", "cryptography>=42", "requests>=2.31", "celery>=5.3"]
+license = {text = "GPL-3.0-or-later"}
+
+[project.optional-dependencies]
+tutor = ["tutor==22.0.4", "tutor-mfe==22.1.2"]
+test = ["pytest>=8", "pytest-django>=4.8", "responses>=0.25", "build>=1"]
+
+[project.entry-points."lms.djangoapp"]
+guardlms = "guardlms_openedx.apps:GuardLMSConfig"
+[project.entry-points."cms.djangoapp"]
+guardlms = "guardlms_openedx.apps:GuardLMSConfig"
+[project.entry-points."tutor.plugin.v1"]
+guardlms = "tutorguardlms.plugin"
+
+[tool.setuptools.packages.find]
+include = ["guardlms_openedx*", "tutorguardlms*"]
+[tool.setuptools.package-data]
+guardlms_openedx = ["templates/guardlms/*", "static/guardlms/*", "locale/*/LC_MESSAGES/*"]
+tutorguardlms = ["templates/**/*"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+pythonpath = ["."]

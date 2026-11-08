@@ -1,0 +1,23 @@
+{% load i18n %}{% get_current_language as LANGUAGE_CODE %}<!doctype html><html lang="{{ LANGUAGE_CODE }}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% trans "GuardLMS for Open edX" %}</title>
+<style>body{font:16px system-ui;max-width:850px;margin:3rem auto;padding:0 1rem;color:#172b4d}button,a{margin:.3rem}button{padding:.6rem 1rem;cursor:pointer}form{display:inline}section{padding:1rem;border:1px solid #ccd4df;border-radius:8px;margin:1rem 0}label{display:block;margin:.8rem 0}dt{font-weight:600}dd{margin:0 0 .7rem}pre{white-space:pre-wrap}</style></head><body>
+<h1>{% trans "GuardLMS for Open edX" %}</h1><p>{% trans "Software inventory, security checks and monitoring for your installation." %}</p>
+{% for message in messages %}<p role="status">{{ message }}</p>{% endfor %}
+<section><h2>{{ status }}</h2><dl>
+<dt>{% trans "Last accepted inventory" %}</dt><dd>{{ connection.last_success|default:"Never" }}</dd>
+<dt>{% trans "Next attempt" %}</dt><dd>{{ connection.next_attempt|default:"Not scheduled" }}</dd>
+<dt>{% trans "Components" %}</dt><dd>{{ connection.component_count }}</dd>
+<dt>{% trans "Key expiry" %}</dt><dd>{{ expiry|default:"Unavailable" }}</dd>
+{% if connection.first_refused %}<dt>{% trans "First refused report" %}</dt><dd>{{ connection.first_refused }}</dd>{% endif %}
+{% if connection.last_error %}<dt>{% trans "Reporting warning" %}</dt><dd>{{ connection.last_error }}</dd>{% endif %}</dl>
+<form method="post" action="{% url 'guardlms:connect' %}">{% csrf_token %}<button>{% if connection.credentials %}{% trans "Reconnect" %}{% else %}{% trans "Connect to GuardLMS" %}{% endif %}</button></form>
+{% if connection.credentials %}<form method="post" action="{% url 'guardlms:push' %}">{% csrf_token %}<button>{% trans "Push inventory now" %}</button></form>
+<form method="post" action="{% url 'guardlms:disconnect' %}">{% csrf_token %}<button>{% trans "Disconnect" %}</button></form>
+<a href="{{ dashboard }}" rel="noopener noreferrer">{% trans "Open in GuardLMS" %}</a>{% endif %}
+</section><section><h2>Monitoring</h2><p>{% trans "Browser errors are enabled after connecting. Server diagnostics and page analytics are optional. Analytics also requires an eligible GuardLMS plan." %}</p>
+<form method="post" action="{% url 'guardlms:preferences' %}">{% csrf_token %}
+<label><input type="checkbox" name="browser_errors" {% if connection.browser_errors %}checked{% endif %}> {% trans "Report browser errors" %}</label>
+<label><input type="checkbox" name="server_errors" {% if connection.server_errors %}checked{% endif %}> {% trans "Report redacted Python and SQL errors" %}</label>
+<label><input type="checkbox" name="analytics" {% if connection.analytics %}checked{% endif %}> {% trans "Enable page analytics" %}</label><button>{% trans "Save monitoring preferences" %}</button></form></section>
+<details><summary>{% trans "Advanced connection details" %}</summary><p><a href="{% url 'guardlms:preview' %}">{% trans "Preview exact inventory payload" %}</a></p><p>Canonical LMS: {{ lms_url }}</p>
+<p>Public ownership token: {{ verification_token|default:"Connect first" }}. Use GuardLMS DNS or HTML verification when ownership remains pending.</p></details>
+</body></html>

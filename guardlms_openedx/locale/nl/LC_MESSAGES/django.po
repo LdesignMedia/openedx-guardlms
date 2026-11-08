@@ -1,0 +1,101 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: openedx-guardlms 0.1.0\n"
+"Language: nl\n"
+"PO-Revision-Date: 2026-11-08 22:00+0000\n"
+"Last-Translator: LdesignMedia\n"
+"Language-Team: Dutch\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "GuardLMS for Open edX"
+msgstr "GuardLMS voor Open edX"
+
+msgid "Software inventory, security checks and monitoring for your installation."
+msgstr "Software-inventarisatie, beveiligingscontroles en monitoring voor uw installatie."
+
+msgid "Last accepted inventory"
+msgstr "Laatst ontvangen inventaris"
+
+msgid "Next attempt"
+msgstr "Volgende poging"
+
+msgid "Components"
+msgstr "Componenten"
+
+msgid "Key expiry"
+msgstr "Vervaldatum sleutel"
+
+msgid "First refused report"
+msgstr "Eerste geweigerde rapport"
+
+msgid "Reporting warning"
+msgstr "Rapportagewaarschuwing"
+
+msgid "Reconnect"
+msgstr "Opnieuw koppelen"
+
+msgid "Connect to GuardLMS"
+msgstr "Koppelen met GuardLMS"
+
+msgid "Push inventory now"
+msgstr "Inventaris nu versturen"
+
+msgid "Disconnect"
+msgstr "Ontkoppelen"
+
+msgid "Open in GuardLMS"
+msgstr "Openen in GuardLMS"
+
+msgid "Browser errors are enabled after connecting. Server diagnostics and page analytics are optional. Analytics also requires an eligible GuardLMS plan."
+msgstr "Browserfouten staan na koppelen aan. Serverdiagnostiek en pagina-analyses zijn optioneel. Analyses vereisen ook een geschikt GuardLMS-abonnement."
+
+msgid "Report browser errors"
+msgstr "Browserfouten rapporteren"
+
+msgid "Report redacted Python and SQL errors"
+msgstr "Geredigeerde Python- en SQL-fouten rapporteren"
+
+msgid "Enable page analytics"
+msgstr "Pagina-analyses inschakelen"
+
+msgid "Save monitoring preferences"
+msgstr "Monitoringinstellingen opslaan"
+
+msgid "Advanced connection details"
+msgstr "Geavanceerde koppelgegevens"
+
+msgid "Preview exact inventory payload"
+msgstr "Exacte inventarispayload bekijken"
+
+msgid "Not connected"
+msgstr "Niet gekoppeld"
+
+msgid "Reconnect required"
+msgstr "Opnieuw koppelen vereist"
+
+msgid "Connected"
+msgstr "Gekoppeld"
+
+msgid "Connected. First inventory accepted."
+msgstr "Gekoppeld. Eerste inventaris ontvangen."
+
+msgid "Connected. Inventory delivery will retry automatically."
+msgstr "Gekoppeld. De inventaris wordt automatisch opnieuw verstuurd."
+
+msgid "Connection could not be completed. Start a new connection attempt."
+msgstr "De koppeling is niet voltooid. Start een nieuwe koppelpoging."
+
+msgid "Disconnected. Reporting has stopped. The website remains in GuardLMS."
+msgstr "Ontkoppeld. Rapportage is gestopt. De website blijft in GuardLMS staan."
+
+msgid "Inventory accepted."
+msgstr "Inventaris ontvangen."
+
+msgid "Inventory was not accepted. Check connection health."
+msgstr "De inventaris is niet ontvangen. Controleer de koppelstatus."
+
+msgid "Stored credentials cannot be decrypted. Restore the deployment encryption key or reconnect."
+msgstr "Opgeslagen inloggegevens kunnen niet worden ontsleuteld. Herstel de encryptiesleutel van de installatie of koppel opnieuw."

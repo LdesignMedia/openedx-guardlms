@@ -1,0 +1,21 @@
+from cryptography.fernet import Fernet
+SECRET_KEY = 'isolated-unit-test-only'
+DEBUG = False
+ALLOWED_HOSTS = ['testserver', 'openedx.example.test']
+INSTALLED_APPS = ['django.contrib.auth', 'django.contrib.contenttypes', 'django.contrib.sessions', 'django.contrib.messages', 'guardlms_openedx']
+DATABASES = {'default': {'ENGINE': 'django.db.backends.sqlite3', 'NAME': ':memory:'}}
+MIDDLEWARE = ['django.contrib.sessions.middleware.SessionMiddleware', 'django.middleware.csrf.CsrfViewMiddleware', 'django.contrib.auth.middleware.AuthenticationMiddleware', 'django.contrib.messages.middleware.MessageMiddleware', 'guardlms_openedx.middleware.MonitoringMiddleware']
+ROOT_URLCONF = 'tests.urls'
+TEMPLATES = [{'BACKEND': 'django.template.backends.django.DjangoTemplates', 'APP_DIRS': True, 'OPTIONS': {'context_processors': ['django.template.context_processors.request', 'django.contrib.messages.context_processors.messages']}}]
+CACHES = {'default': {'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'}}
+GUARDLMS_ENCRYPTION_KEY = Fernet.generate_key().decode()
+GUARDLMS_SITE_URL = 'https://openedx.example.test'
+GUARDLMS_API_URL = 'https://api.guardlms.test'
+GUARDLMS_DASHBOARD_URL = 'https://dashboard.guardlms.test'
+GUARDLMS_BROWSER_ORIGINS = ['https://studio.example.test', 'https://apps.example.test']
+GUARDLMS_MFE_MANIFEST = '/tmp/guardlms-openedx-unit-manifest.json'
+GUARDLMS_OPENEDX_VERSION = 'release/verawood.2'
+USE_TZ = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
